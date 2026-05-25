@@ -1,0 +1,824 @@
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:15:49
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:15:49] [HB] tick
+[17:15:49] [HB] tick
+[17:15:50] [VOICE] inject cmd
+[17:15:50] [MAIN] recv voice cmd
+[17:15:50] [MOTION] run
+[17:15:50] [DISPLAY] run
+[17:15:50] [TTS] run
+[17:15:50] [HB] tick
+[17:15:50] [HB] tick
+[17:15:51] [HB] tick
+[17:15:51] [HB] tick
+[17:15:52] [VOICE] inject cmd
+[17:15:52] [MAIN] recv voice cmd
+[17:15:52] [MOTION] run
+[17:15:52] [DISPLAY] run
+[17:15:52] [TTS] run
+[17:15:52] [HB] tick
+[17:15:52] [HB] tick
+[17:15:53] [HB] tick
+[17:15:53] [HB] tick
+[17:15:54] [VOICE] inject cmd
+[17:15:54] [MAIN] recv voice cmd
+[17:15:54] [MOTION] run
+[17:15:54] [DISPLAY] run
+[17:15:54] [TTS] run
+[17:15:54] [HB] tick
+[17:15:54] [HB] tick
+[17:15:55] [HB] tick
+[17:15:55] [HB] tick
+[17:15:56] [VOICE] inject cmd
+[17:15:56] [MAIN] recv voice cmd
+[17:15:56] [MOTION] run
+[17:15:56] [DISPLAY] run
+[17:15:56] [TTS] run
+[17:15:56] [HB] tick
+[17:15:56] [HB] tick
+[17:15:57] [HB] tick
+[17:15:57] [HB] tick
+[17:15:58] [VOICE] inject cmd
+[17:15:58] [MAIN] recv voice cmd
+[17:15:58] [MOTION] run
+[17:15:58] [DISPLAY] run
+[17:15:58] [TTS] run
+[17:15:58] [HB] tick
+[17:15:58] [HB] tick
+[17:15:59] [HB] tick
+[17:15:59] [HB] tick
+[17:16:00] [VOICE] inject cmd
+[17:16:00] [MAIN] recv voice cmd
+[17:16:00] [MOTION] run
+[17:16:00] [DISPLAY] run
+[17:16:00] [TTS] run
+[17:16:00] [HB] tick
+[17:16:00] [HB] tick
+[17:16:01] [HB] tick
+[17:16:01] [HB] tick
+[17:16:02] [VOICE] inject cmd
+[17:16:02] [MAIN] recv voice cmd
+[17:16:02] [MOTION] run
+[17:16:02] [DISPLAY] run
+[17:16:02] [TTS] run
+[17:16:02] [HB] tick
+[17:16:02] [HB] tick
+[17:16:03] [HB] tick
+[17:16:03] [HB] tick
+[17:16:04] [VOICE] inject cmd
+[17:16:04] [MAIN] recv voice cmd
+[17:16:04] [MOTION] run
+[17:16:04] [DISPLAY] run
+[17:16:04] [TTS] run
+[17:16:04] [HB] tick
+[17:16:04] [HB] tick
+[17:16:05] [HB] tick
+[17:16:05] [HB] tick
+[17:16:06] [VOICE] inject cmd
+[17:16:06] [MAIN] recv voice cmd
+[17:16:06] [MOTION] run
+[17:16:06] [DISPLAY] run
+[17:16:06] [TTS] run
+[17:16:06] [HB] tick
+[17:16:06] [HB] tick
+[17:16:07] [HB] tick
+[17:16:07] [HB] tick
+[17:16:08] [VOICE] inject cmd
+[17:16:08] [MAIN] recv voice cmd
+[17:16:08] [MOTION] run
+[17:16:08] [DISPLAY] run
+[17:16:08] [TTS] run
+[17:16:08] [HB] tick
+[17:16:08] [HB] tick
+[17:16:09] [HB] tick
+[17:16:09] [HB] tick
+[17:16:10] [VOICE] inject cmd
+[17:16:10] [MAIN] recv voice cmd
+[17:16:10] [MOTION] run
+[17:16:10] [DISPLAY] run
+[17:16:10] [TTS] run
+[17:16:10] [HB] tick
+[17:16:10] [HB] tick
+[17:16:11] [HB] tick
+[17:16:11] [HB] tick
+[17:16:12] [VOICE] inject cmd
+[17:16:12] [MAIN] recv voice cmd
+[17:16:12] [MOTION] run
+[17:16:12] [DISPLAY] run
+[17:16:12] [TTS] run
+[17:16:12] [HB] tick
+[17:16:12] [HB] tick
+[17:16:13] [HB] tick
+[17:16:13] [HB] tick
+[17:16:14] [VOICE] inject cmd
+[17:16:14] [MAIN] recv voice cmd
+[17:16:14] [MOTION] run
+[17:16:14] [DISPLAY] run
+[17:16:14] [TTS] run
+[17:16:14] [HB] tick
+[17:16:14] [HB] tick
+[17:16:15] [HB] tick
+[17:16:15] [HB] tick
+[17:16:16] [VOICE] inject cmd
+[17:16:16] [MAIN] recv voice cmd
+[17:16:16] [MOTION] run
+[17:16:16] [DISPLAY] run
+[17:16:16] [TTS] run
+[17:16:16] [HB] tick
+[17:16:16] [HB] tick
+[17:16:17] [HB] tick
+[17:16:17] [HB] tick
+[17:16:18] [VOICE] inject cmd
+[17:16:18] [MAIN] recv voice cmd
+[17:16:18] [MOTION] run
+[17:16:18] [DISPLAY] run
+[17:16:18] [TTS] run
+[17:16:18] [HB] tick
+[17:16:18] [HB] tick
+[17:16:19] [HB] tick
+[17:16:19] [HB] tick
+[17:16:20] [VOICE] inject cmd
+[17:16:20] [MAIN] recv voice cmd
+[17:16:20] [MOTION] run
+[17:16:20] [DISPLAY] run
+[17:16:20] [TTS] run
+[17:16:20] [HB] tick
+[17:16:20] [HB] tick
+[17:16:21] [HB] tick
+[17:16:21] [HB] tick
+[17:16:22] [VOICE] inject cmd
+[17:16:22] [MAIN] recv voice cmd
+[17:16:22] [MOTION] run
+[17:16:22] [DISPLAY] run
+[17:16:22] [TTS] run
+[17:16:22] [HB] tick
+[17:16:22] [HB] tick
+[17:16:23] [HB] tick
+[17:16:23] [HB] tick
+[17:16:24] [VOICE] inject cmd
+[17:16:24] [MAIN] recv voice cmd
+[17:16:24] [MOTION] run
+[17:16:24] [DISPLAY] run
+[17:16:24] [TTS] run
+[17:16:24] [HB] tick
+[17:16:24] [HB] tick
+[17:16:25] [HB] tick
+[17:16:25] [HB] tick
+[17:16:26] [VOICE] inject cmd
+[17:16:26] [MAIN] recv voice cmd
+[17:16:26] [MOTION] run
+[17:16:26] [DISPLAY] run
+[17:16:26] [TTS] run
+[17:16:26] [HB] tick
+[17:16:26] [HB] tick
+[17:16:27] [HB] tick
+[17:16:27] [HB] tick
+[17:16:28] [VOICE] inject cmd
+[17:16:28] [MAIN] recv voice cmd
+[17:16:28] [MOTION] run
+[17:16:28] [DISPLAY] run
+[17:16:28] [TTS] run
+[17:16:28] [HB] tick
+[17:16:28] [HB] tick
+[17:16:29] [HB] tick
+[17:16:29] [HB] tick
+[17:16:30] [VOICE] inject cmd
+[17:16:30] [MAIN] recv voice cmd
+[17:16:30] [MOTION] run
+[17:16:30] [DISPLAY] run
+[17:16:30] [TTS] run
+[17:16:30] [HB] tick
+[17:16:30] [HB] tick
+[17:16:31] [HB] tick
+[17:16:31] [HB] tick
+[17:16:32] [VOICE] inject cmd
+[17:16:32] [MAIN] recv voice cmd
+[17:16:32] [MOTION] run
+[17:16:32] [DISPLAY] run
+[17:16:32] [TTS] run
+[17:16:32] [HB] tick
+[17:16:32] [HB] tick
+[17:16:33] [HB] tick
+[17:16:33] [HB] tick
+[17:16:34] [VOICE] inject cmd
+[17:16:34] [MAIN] recv voice cmd
+[17:16:34] [MOTION] run
+[17:16:34] [DISPLAY] run
+[17:16:34] [TTS] run
+[17:16:34] [HB] tick
+[17:16:34] [HB] tick
+[17:16:35] [HB] tick
+[17:16:35] [HB] tick
+[17:16:36] [VOICE] inject cmd
+[17:16:36] [MAIN] recv voice cmd
+[17:16:36] [MOTION] run
+[17:16:36] [DISPLAY] run
+[17:16:36] [TTS] run
+[17:16:36] [HB] tick
+[17:16:36] [HB] tick
+[17:16:37] [HB] tick
+[17:16:37] [HB] tick
+[17:16:38] [VOICE] inject cmd
+[17:16:38] [MAIN] recv voice cmd
+[17:16:38] [MOTION] run
+[17:16:38] [DISPLAY] run
+[17:16:38] [TTS] run
+[17:16:38] [HB] tick
+[17:16:38] [HB] tick
+[17:16:39] [HB] tick
+[17:16:39] [HB] tick
+[17:16:40] [VOICE] inject cmd
+[17:16:40] [MAIN] recv voice cmd
+[17:16:40] [MOTION] run
+[17:16:40] [DISPLAY] run
+[17:16:40] [TTS] run
+[17:16:40] [HB] tick
+[17:16:40] [HB] tick
+[17:16:41] [HB] tick
+[17:16:41] [HB] tick
+[17:16:42] [VOICE] inject cmd
+[17:16:42] [MAIN] recv voice cmd
+[17:16:42] [MOTION] run
+[17:16:42] [DISPLAY] run
+[17:16:42] [TTS] run
+[17:16:42] [HB] tick
+[17:16:42] [HB] tick
+[17:16:43] [HB] tick
+[17:16:43] [HB] tick
+[17:16:44] [VOICE] inject cmd
+[17:16:44] [MAIN] recv voice cmd
+[17:16:44] [MOTION] run
+[17:16:44] [DISPLAY] run
+[17:16:44] [TTS] run
+[17:16:44] [HB] tick
+[17:16:44] [HB] tick
+[17:16:45] [HB] tick
+[17:16:45] [HB] tick
+[17:16:46] [VOICE] inject cmd
+[17:16:46] [MAIN] recv voice cmd
+[17:16:46] [MOTION] run
+[17:16:46] [DISPLAY] run
+[17:16:46] [TTS] run
+[17:16:46] [HB] tick
+[17:16:46] [HB] tick
+[17:16:47] [HB] tick
+[17:16:47] [HB] tick
+[17:16:48] [VOICE] inject cmd
+[17:16:48] [MAIN] recv voice cmd
+[17:16:48] [MOTION] run
+[17:16:48] [DISPLAY] run
+[17:16:48] [TTS] run
+[17:16:48] [HB] tick
+[17:16:48] [HB] tick
+[17:16:49] [HB] tick
+[17:16:49] [HB] tick
+[17:16:50] [VOICE] inject cmd
+[17:16:50] [MAIN] recv voice cmd
+[17:16:50] [MOTION] run
+[17:16:50] [DISPLAY] run
+[17:16:50] [TTS] run
+[17:16:50] [HB] tick
+[17:16:50] [HB] tick
+[17:16:51] [HB] tick
+[17:16:51] [HB] tick
+[17:16:52] [VOICE] inject cmd
+[17:16:52] [MAIN] recv voice cmd
+[17:16:52] [MOTION] run
+[17:16:52] [DISPLAY] run
+[17:16:52] [TTS] run
+[17:16:52] [HB] tick
+[17:16:52] [HB] tick
+[17:16:53] [HB] tick
+[17:16:53] [HB] tick
+[17:16:54] [VOICE] inject cmd
+[17:16:54] [MAIN] recv voice cmd
+[17:16:54] [MOTION] run
+[17:16:54] [DISPLAY] run
+[17:16:54] [TTS] run
+[17:16:54] [HB] tick
+[17:16:54] [HB] tick
+[17:16:55] [HB] tick
+[17:16:55] [HB] tick
+[17:16:56] [VOICE] inject cmd
+[17:16:56] [MAIN] recv voice cmd
+[17:16:56] [MOTION] run
+[17:16:56] [DISPLAY] run
+[17:16:56] [TTS] run
+[17:16:56] [HB] tick
+[17:16:56] [HB] tick
+[17:16:57] [HB] tick
+[17:16:57] [HB] tick
+[17:16:58] [VOICE] inject cmd
+[17:16:58] [MAIN] recv voice cmd
+[17:16:58] [MOTION] run
+[17:16:58] [DISPLAY] run
+[17:16:58] [TTS] run
+[17:16:58] [HB] tick
+[17:16:58] [HB] tick
+[17:16:59] [HB] tick
+[17:16:59] [HB] tick
+[17:17:00] [VOICE] inject cmd
+[17:17:00] [MAIN] recv voice cmd
+[17:17:00] [MOTION] run
+[17:17:00] [DISPLAY] run
+[17:17:00] [TTS] run
+[17:17:00] [HB] tick
+[17:17:00] [HB] tick
+[17:17:01] [HB] tick
+[17:17:01] [HB] tick
+[17:17:02] [VOICE] inject cmd
+[17:17:02] [MAIN] recv voice cmd
+[17:17:02] [MOTION] run
+[17:17:02] [DISPLAY] run
+[17:17:02] [TTS] run
+[17:17:02] [HB] tick
+[17:17:02] [HB] tick
+[17:17:03] [HB] tick
+[17:17:03] [HB] tick
+[17:17:04] [VOICE] inject cmd
+[17:17:04] [MAIN] recv voice cmd
+[17:17:04] [MOTION] run
+[17:17:04] [DISPLAY] run
+[17:17:04] [TTS] run
+[17:17:04] [HB] tick
+[17:17:04] [HB] tick
+[17:17:05] [HB] tick
+[17:17:05] [HB] tick
+[17:17:06] [VOICE] inject cmd
+[17:17:06] [MAIN] recv voice cmd
+[17:17:06] [MOTION] run
+[17:17:06] [DISPLAY] run
+[17:17:06] [TTS] run
+[17:17:06] [HB] tick
+[17:17:06] [HB] tick
+[17:17:07] [HB] tick
+[17:17:07] [HB] tick
+[17:17:08] [VOICE] inject cmd
+[17:17:08] [MAIN] recv voice cmd
+[17:17:08] [MOTION] run
+[17:17:08] [DISPLAY] run
+[17:17:08] [TTS] run
+[17:17:08] [HB] tick
+[17:17:08] [HB] tick
+[17:17:09] [HB] tick
+[17:17:09] [HB] tick
+[17:17:10] [VOICE] inject cmd
+[17:17:10] [MAIN] recv voice cmd
+[17:17:10] [MOTION] run
+[17:17:10] [DISPLAY] run
+[17:17:10] [TTS] run
+[17:17:10] [HB] tick
+[17:17:10] [HB] tick
+[17:17:11] [HB] tick
+[17:17:11] [HB] tick
+[17:17:12] [VOICE] inject cmd
+[17:17:12] [MAIN] recv voice cmd
+[17:17:12] [MOTION] run
+[17:17:12] [DISPLAY] run
+[17:17:12] [TTS] run
+[17:17:12] [HB] tick
+[17:17:12] [HB] tick
+[17:17:13] [HB] tick
+[17:17:13] [HB] tick
+[17:17:14] [VOICE] inject cmd
+[17:17:14] [MAIN] recv voice cmd
+[17:17:14] [MOTION] run
+[17:17:14] [DISPLAY] run
+[17:17:14] [TTS] run
+[17:17:14] [HB] tick
+[17:17:14] [HB] tick
+[17:17:15] [HB] tick
+[17:17:15] [HB] tick
+[17:17:16] [VOICE] inject cmd
+[17:17:16] [MAIN] recv voice cmd
+[17:17:16] [MOTION] run
+[17:17:16] [DISPLAY] run
+[17:17:16] [TTS] run
+[17:17:16] [HB] tick
+[17:17:16] [HB] tick
+[17:17:17] [HB] tick
+[17:17:17] [HB] tick
+[17:17:18] [VOICE] inject cmd
+[17:17:18] [MAIN] recv voice cmd
+[17:17:18] [MOTION] run
+[17:17:18] [DISPLAY] run
+[17:17:18] [TTS] run
+[17:17:18] [HB] tick
+[17:17:18] [HB] tick
+[17:17:19] [HB] tick
+[17:17:19] [HB] tick
+[17:17:20] [VOICE] inject cmd
+[17:17:20] [MAIN] recv voice cmd
+[17:17:20] [MOTION] run
+[17:17:20] [DISPLAY] run
+[17:17:20] [TTS] run
+[17:17:20] [HB] tick
+[17:17:20] [HB] tick
+[17:17:21] [HB] tick
+[17:17:21] [HB] tick
+[17:17:22] [VOICE] inject cmd
+[17:17:22] [MAIN] recv voice cmd
+[17:17:22] [MOTION] run
+[17:17:22] [DISPLAY] run
+[17:17:22] [TTS] run
+[17:17:22] [HB] tick
+[17:17:22] [HB] tick
+[17:17:23] [HB] tick
+[17:17:23] [HB] tick
+[17:17:24] [VOICE] inject cmd
+[17:17:24] [MAIN] recv voice cmd
+[17:17:24] [MOTION] run
+[17:17:24] [DISPLAY] run
+[17:17:24] [TTS] run
+[17:17:24] [HB] tick
+[17:17:24] [HB] tick
+[17:17:25] [HB] tick
+[17:17:25] [HB] tick
+[17:17:26] [VOICE] inject cmd
+[17:17:26] [MAIN] recv voice cmd
+[17:17:26] [MOTION] run
+[17:17:26] [DISPLAY] run
+[17:17:26] [TTS] run
+[17:17:26] [HB] tick
+[17:17:26] [HB] tick
+[17:17:27] [HB] tick
+[17:17:27] [HB] tick
+[17:17:28] [VOICE] inject cmd
+[17:17:28] [MAIN] recv voice cmd
+[17:17:28] [MOTION] run
+[17:17:28] [DISPLAY] run
+[17:17:28] [TTS] run
+[17:17:28] [HB] tick
+[17:17:28] [HB] tick
+[17:17:29] [HB] tick
+[17:17:29] [HB] tick
+[17:17:30] [VOICE] inject cmd
+[17:17:30] [MAIN] recv voice cmd
+[17:17:30] [MOTION] run
+[17:17:30] [DISPLAY] run
+[17:17:30] [TTS] run
+[17:17:30] [HB] tick
+[17:17:30] [HB] tick
+[17:17:31] [HB] tick
+[17:17:31] [HB] tick
+[17:17:32] [VOICE] inject cmd
+[17:17:32] [MAIN] recv voice cmd
+[17:17:32] [MOTION] run
+[17:17:32] [DISPLAY] run
+[17:17:32] [TTS] run
+[17:17:32] [HB] tick
+[17:17:32] [HB] tick
+[17:17:33] [HB] tick
+[17:17:33] [HB] tick
+[17:17:34] [VOICE] inject cmd
+[17:17:34] [MAIN] recv voice cmd
+[17:17:34] [MOTION] run
+[17:17:34] [DISPLAY] run
+[17:17:34] [TTS] run
+[17:17:34] [HB] tick
+[17:17:34] [HB] tick
+[17:17:35] [HB] tick
+[17:17:35] [HB] tick
+[17:17:36] [VOICE] inject cmd
+[17:17:36] [MAIN] recv voice cmd
+[17:17:36] [MOTION] run
+[17:17:36] [DISPLAY] run
+[17:17:36] [TTS] run
+[17:17:36] [HB] tick
+[17:17:36] [HB] tick
+[17:17:37] [HB] tick
+[17:17:37] [HB] tick
+[17:17:38] [VOICE] inject cmd
+[17:17:38] [MAIN] recv voice cmd
+[17:17:38] [MOTION] run
+[17:17:38] [DISPLAY] run
+[17:17:38] [TTS] run
+[17:17:38] [HB] tick
+[17:17:38] [HB] tick
+[17:17:39] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:17:39
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:17:46
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:17:46] [VOICE] inject cmd
+[17:17:46] [MAIN] recv voice cmd
+[17:17:46] [MOTION] run
+[17:17:46] [DISPLAY] run
+[17:17:46] [TTS] run
+[17:17:46] [HB] tick
+[17:17:46] [HB] tick
+[17:17:47] [HB] tick
+[17:17:47] [HB] tick
+[17:17:48] [VOICE] inject cmd
+[17:17:48] [MAIN] recv voice cmd
+[17:17:48] [MOTION] run
+[17:17:48] [DISPLAY] run
+[17:17:48] [TTS] run
+[17:17:48] [HB] tick
+[17:17:48] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:18:28
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:18:47
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:18:47] [VOICE] inject cmd
+[17:18:47] [MAIN] recv voice cmd
+[17:18:47] [MOTION] run
+[17:18:47] [DISPLAY] run
+[17:18:47] [TTS] run
+[17:18:47] [HB] tick
+[17:18:48] [HB] tick
+[17:18:48] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:20:19
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:20:27
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:20:27] [HB] tick
+[17:20:28] [HB] tick
+[17:20:28] [VOICE] inject cmd
+[17:20:28] [MAIN] recv voice cmd
+[17:20:28] [MOTION] run
+[17:20:28] [DISPLAY] run
+[17:20:28] [TTS] run
+[17:20:28] [HB] tick
+[17:20:29] [HB] tick
+[17:20:29] [HB] tick
+[17:20:30] [HB] tick
+[17:20:30] [VOICE] inject cmd
+[17:20:30] [MAIN] recv voice cmd
+[17:20:30] [MOTION] run
+[17:20:30] [DISPLAY] run
+[17:20:30] [TTS] run
+[17:20:30] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:20:33
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:20:37
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:20:37] [HB] tick
+[17:20:38] [HB] tick
+[17:20:38] [HB] tick
+[17:20:39] [VOICE] inject cmd
+[17:20:39] [MAIN] recv voice cmd
+[17:20:39] [MOTION] run
+[17:20:39] [DISPLAY] run
+[17:20:39] [TTS] run
+[17:20:39] [HB] tick
+[17:20:39] [HB] tick
+[17:20:40] [HB] tick
+[17:20:40] [HB] tick
+[17:20:41] [VOICE] inject cmd
+[17:20:41] [MAIN] recv voice cmd
+[17:20:41] [MOTION] run
+[17:20:41] [DISPLAY] run
+[17:20:41] [TTS] run
+[17:20:41] [HB] tick
+[17:20:41] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:23:22
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:23:38
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:23:39] [HB] tick
+[17:23:39] [HB] tick
+[17:23:40] [VOICE] inject cmd
+[17:23:40] [MAIN] recv voice cmd
+[17:23:40] [MOTION] run
+[17:23:40] [DISPLAY] run
+[17:23:40] [TTS] run
+[17:23:40] [HB] tick
+[17:23:40] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:23:43
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:26:09
+Port: COM11, Baudrate: 115200
+---------------------------------------
+---------------------------------------
+End time: 2026-05-25 17:26:14
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:29:27
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:29:27] [VOICE] inject cmd
+[17:29:27] [MAIN] recv voice cmd
+[17:29:27] [MOTION] run
+[17:29:27] [DISPLAY] run (OLED NOT INITED!)
+[17:29:27] [TTS] run
+[17:29:27] [HB] tick
+[17:29:28] [HB] tick
+[17:29:28] [HB] tick
+[17:29:29] [HB] tick
+[17:29:29] [VOICE] inject cmd
+[17:29:29] [MAIN] recv voice cmd
+[17:29:29] [MOTION] run
+[17:29:29] [DISPLAY] run (OLED NOT INITED!)
+[17:29:29] [TTS] run
+[17:29:29] [HB] tick
+[17:29:30] [HB] tick
+[17:29:30] [HB] tick
+[17:29:31] [HB] tick
+[17:29:31] [VOICE] inject cmd
+[17:29:31] [MAIN] recv voice cmd
+[17:29:31] [MOTION] run
+[17:29:31] [DISPLAY] run (OLED NOT INITED!)
+[17:29:31] [TTS] run
+[17:29:31] [HB] tick
+[17:29:32] [HB] tick
+[17:29:32] [HB] tick
+[17:29:33] [HB] tick
+[17:29:33] [VOICE] inject cmd
+[17:29:33] [MAIN] recv voice cmd
+[17:29:33] [MOTION] run
+[17:29:33] [DISPLAY] run (OLED NOT INITED!)
+[17:29:33] [TTS] run
+[17:29:33] [HB] tick
+[17:29:34] [HB] tick
+[17:29:34] [HB] tick
+[17:29:35] [HB] tick
+[17:29:35] [VOICE] inject cmd
+[17:29:35] [MAIN] recv voice cmd
+[17:29:35] [MOTION] run
+[17:29:35] [DISPLAY] run (OLED NOT INITED!)
+[17:29:35] [TTS] run
+[17:29:35] [HB] tick
+[17:29:36] [HB] tick
+[17:29:36] [HB] tick
+[17:29:37] [HB] tick
+[17:29:37] [VOICE] inject cmd
+[17:29:37] [MAIN] recv voice cmd
+[17:29:37] [MOTION] run
+[17:29:37] [DISPLAY] run (OLED NOT INITED!)
+[17:29:37] [TTS] run
+[17:29:37] [HB] tick
+[17:29:38] [HB] tick
+[17:29:38] [HB] tick
+[17:29:39] [HB] tick
+[17:29:39] [VOICE] inject cmd
+[17:29:39] [MAIN] recv voice cmd
+[17:29:39] [MOTION] run
+[17:29:39] [DISPLAY] run (OLED NOT INITED!)
+[17:29:39] [TTS] run
+[17:29:39] [HB] tick
+[17:29:40] [HB] tick
+[17:29:40] [HB] tick
+[17:29:41] [HB] tick
+[17:29:41] [VOICE] inject cmd
+[17:29:41] [MAIN] recv voice cmd
+[17:29:41] [MOTION] run
+[17:29:41] [DISPLAY] run (OLED NOT INITED!)
+[17:29:41] [TTS] run
+[17:29:41] [HB] tick
+[17:29:42] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:29:44
+========== Manbot Test End ==========
+
+========== Manbot Test Start ==========
+Start time: 2026-05-25 17:30:42
+Port: COM11, Baudrate: 115200
+---------------------------------------
+[17:30:43] [HB] tick
+[17:30:43] [HB] tick
+[17:30:44] [VOICE] inject cmd
+[17:30:44] [MAIN] recv voice cmd
+[17:30:44] [MOTION] run
+[17:30:44] [DISPLAY] run (OLED NOT INITED!)
+[17:30:44] [TTS] run
+[17:30:44] [HB] tick
+[17:30:44] [HB] tick
+[17:30:45] [HB] tick
+[17:30:45] [HB] tick
+[17:30:46] [VOICE] inject cmd
+[17:30:46] [MAIN] recv voice cmd
+[17:30:46] [MOTION] run
+[17:30:46] [DISPLAY] run (OLED NOT INITED!)
+[17:30:46] [TTS] run
+[17:30:46] [HB] tick
+[17:30:46] [HB] tick
+[17:30:47] [HB] tick
+[17:30:47] [HB] tick
+[17:30:48] [VOICE] inject cmd
+[17:30:48] [MAIN] recv voice cmd
+[17:30:48] [MOTION] run
+[17:30:48] [DISPLAY] run (OLED NOT INITED!)
+[17:30:48] [TTS] run
+[17:30:48] [HB] tick
+[17:30:48] [HB] tick
+[17:30:49] [HB] tick
+[17:30:49] [HB] tick
+[17:30:50] [VOICE] inject cmd
+[17:30:50] [MAIN] recv voice cmd
+[17:30:50] [MOTION] run
+[17:30:50] [DISPLAY] run (OLED NOT INITED!)
+[17:30:50] [TTS] run
+[17:30:50] [HB] tick
+[17:30:50] [HB] tick
+[17:30:51] [HB] tick
+[17:30:51] [HB] tick
+[17:30:52] [VOICE] inject cmd
+[17:30:52] [MAIN] recv voice cmd
+[17:30:52] [MOTION] run
+[17:30:52] [DISPLAY] run (OLED NOT INITED!)
+[17:30:52] [TTS] run
+[17:30:52] [HB] tick
+[17:30:52] [HB] tick
+[17:30:53] [HB] tick
+[17:30:53] [HB] tick
+[17:30:54] [VOICE] inject cmd
+[17:30:54] [MAIN] recv voice cmd
+[17:30:54] [MOTION] run
+[17:30:54] [DISPLAY] run (OLED NOT INITED!)
+[17:30:54] [TTS] run
+[17:30:54] [HB] tick
+[17:30:54] [HB] tick
+[17:30:55] [HB] tick
+[17:30:55] [HB] tick
+[17:30:56] [VOICE] inject cmd
+[17:30:56] [MAIN] recv voice cmd
+[17:30:56] [MOTION] run
+[17:30:56] [DISPLAY] run (OLED NOT INITED!)
+[17:30:56] [TTS] run
+[17:30:56] [HB] tick
+[17:30:56] [HB] tick
+[17:30:57] [HB] tick
+[17:30:57] [HB] tick
+[17:30:58] [VOICE] inject cmd
+[17:30:58] [MAIN] recv voice cmd
+[17:30:58] [MOTION] run
+[17:30:58] [DISPLAY] run (OLED NOT INITED!)
+[17:30:58] [TTS] run
+[17:30:58] [HB] tick
+[17:30:58] [HB] tick
+[17:30:59] [HB] tick
+[17:30:59] [HB] tick
+[17:31:00] [VOICE] inject cmd
+[17:31:00] [MAIN] recv voice cmd
+[17:31:00] [MOTION] run
+[17:31:00] [DISPLAY] run (OLED NOT INITED!)
+[17:31:00] [TTS] run
+[17:31:00] [HB] tick
+[17:31:00] [HB] tick
+[17:31:01] [HB] tick
+[17:31:01] [HB] tick
+[17:31:02] [VOICE] inject cmd
+[17:31:02] [MAIN] recv voice cmd
+[17:31:02] [MOTION] run
+[17:31:02] [DISPLAY] run (OLED NOT INITED!)
+[17:31:02] [TTS] run
+[17:31:02] [HB] tick
+[17:31:02] [HB] tick
+[17:31:03] [HB] tick
+[17:31:03] [HB] tick
+[17:31:04] [VOICE] inject cmd
+[17:31:04] [MAIN] recv voice cmd
+[17:31:04] [MOTION] run
+[17:31:04] [DISPLAY] run (OLED NOT INITED!)
+[17:31:04] [TTS] run
+[17:31:04] [HB] tick
+[17:31:04] [HB] tick
+[17:31:05] [HB] tick
+[17:31:05] [HB] tick
+[17:31:06] [VOICE] inject cmd
+[17:31:06] [MAIN] recv voice cmd
+[17:31:06] [MOTION] run
+[17:31:06] [DISPLAY] run (OLED NOT INITED!)
+[17:31:06] [TTS] run
+[17:31:06] [HB] tick
+[17:31:06] [HB] tick
+[17:31:07] [HB] tick
+[17:31:07] [HB] tick
+[17:31:08] [VOICE] inject cmd
+[17:31:08] [MAIN] recv voice cmd
+[17:31:08] [MOTION] run
+[17:31:08] [DISPLAY] run (OLED NOT INITED!)
+[17:31:08] [TTS] run
+[17:31:08] [HB] tick
+[17:31:08] [HB] tick
+---------------------------------------
+End time: 2026-05-25 17:31:08
+========== Manbot Test End ==========
