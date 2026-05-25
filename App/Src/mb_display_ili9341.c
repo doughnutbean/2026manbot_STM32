@@ -231,9 +231,9 @@ static void ILI9341_REG_Config(void)
     ILI9341_WriteData(0x38);
     ILI9341_WriteData(0x0F);
 
-    /* Memory Access Control: 竖屏, 左上角起点 */
+    /* Memory Access Control: 竖屏, 左上角起点, 不翻转 */
     ILI9341_WriteCmd(0x36);
-    ILI9341_WriteData(0xC8);
+    ILI9341_WriteData(0x48);
 
     /* Column address: 0 ~ 239 */
     ILI9341_WriteCmd(0x2A);
@@ -309,4 +309,88 @@ void ILI9341_FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t c
 void ILI9341_FillScreen(uint16_t color)
 {
     ILI9341_FillRect(0U, 0U, ILI9341_WIDTH, ILI9341_HEIGHT, color);
+}
+
+/* ========================== 绘图基础函数 ========================== */
+
+/* 画单点 */
+void ILI9341_SetPixel(uint16_t x, uint16_t y, uint16_t color)
+{
+    if (x >= ILI9341_WIDTH || y >= ILI9341_HEIGHT) { return; }
+    ILI9341_OpenWindow(x, y, 1U, 1U);
+    ILI9341_WritePixel(color);
+}
+
+/* 画水平线 */
+void ILI9341_DrawHLine(uint16_t x, uint16_t y, uint16_t w, uint16_t color)
+{
+    ILI9341_FillRect(x, y, w, 1U, color);
+}
+
+/* 画竖直线 */
+void ILI9341_DrawVLine(uint16_t x, uint16_t y, uint16_t h, uint16_t color)
+{
+    ILI9341_FillRect(x, y, 1U, h, color);
+}
+
+/* Bresenham 画线 */
+void ILI9341_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color)
+{
+    int16_t dx, dy, sx, sy, err, e2;
+
+    if (x0 == x1) { ILI9341_DrawVLine(x0, (y0 < y1 ? y0 : y1), (y0 < y1 ? y1 - y0 + 1 : y0 - y1 + 1), color); return; }
+    if (y0 == y1) { ILI9341_DrawHLine((x0 < x1 ? x0 : x1), y0, (x0 < x1 ? x1 - x0 + 1 : x0 - x1 + 1), color); return; }
+
+    dx = (int16_t)((x1 > x0) ? (x1 - x0) : (x0 - x1));
+    dy = (int16_t)((y1 > y0) ? (y1 - y0) : (y0 - y1));
+    sx = (x0 < x1) ? 1 : -1;
+    sy = (y0 < y1) ? 1 : -1;
+    err = ((dx > dy) ? dx : -dy) / 2;
+
+    for (;;)
+    {
+        ILI9341_SetPixel((uint16_t)x0, (uint16_t)y0, color);
+        if (x0 == (int16_t)x1 && y0 == (int16_t)y1) { break; }
+        e2 = err;
+        if (e2 > -dx) { err -= dy; x0 += sx; }
+        if (e2 <  dy) { err += dx; y0 += sy; }
+    }
+}
+
+/* 实心圆 */
+void ILI9341_FillCircle(uint16_t cx, uint16_t cy, uint16_t r, uint16_t color)
+{
+    int16_t y;
+    int32_t r2, dy2, dx;
+    uint16_t y0, y1, x0, x1;
+
+    if (r == 0U) { ILI9341_SetPixel(cx, cy, color); return; }
+
+    r2 = (int32_t)r * (int32_t)r;
+    y0 = (cy < r) ? 0U : (uint16_t)(cy - r);
+    y1 = (uint16_t)(cy + r);
+    if (y1 >= ILI9341_HEIGHT) { y1 = ILI9341_HEIGHT - 1U; }
+
+    for (y = (int16_t)y0; y <= (int16_t)y1; y++)
+    {
+        dy2 = (int32_t)(y - (int16_t)cy) * (int32_t)(y - (int16_t)cy);
+        if (dy2 > r2) { continue; }
+
+        /* 整数开方（对 r ≤ 120 足够快） */
+        {
+            int32_t val = r2 - dy2;
+            int32_t s = 1;
+            while (s * s <= val) { s++; }
+            dx = s - 1;
+        }
+
+        x0 = (uint16_t)((int16_t)cx - (int16_t)dx);
+        x1 = (uint16_t)((int16_t)cx + (int16_t)dx);
+        if (x1 >= ILI9341_WIDTH) { x1 = ILI9341_WIDTH - 1U; }
+
+        if (x0 <= x1)
+        {
+            ILI9341_DrawHLine(x0, (uint16_t)y, (uint16_t)(x1 - x0 + 1U), color);
+        }
+    }
 }

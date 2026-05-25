@@ -24,12 +24,31 @@ void ILI9341_WritePixel(uint16_t color);
 void ILI9341_FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 void ILI9341_FillScreen(uint16_t color);
 
-/* 表情占位: 用纯色块代替 */
-#define ILI9341_COLOR_HAPPY    0x07E0U   /* 绿色 */
-#define ILI9341_COLOR_SAD      0x001FU   /* 蓝色 */
-#define ILI9341_COLOR_SLEEPY   0xFFE0U   /* 黄色 */
-#define ILI9341_COLOR_CONFUSED 0xF81FU   /* 品红 */
-#define ILI9341_COLOR_BOOT     0xFFFFU   /* 白色 */
+/* 阶段二：绘图基础函数 */
+void ILI9341_SetPixel(uint16_t x, uint16_t y, uint16_t color);
+void ILI9341_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void ILI9341_FillCircle(uint16_t cx, uint16_t cy, uint16_t r, uint16_t color);
+void ILI9341_DrawHLine(uint16_t x, uint16_t y, uint16_t w, uint16_t color);
+void ILI9341_DrawVLine(uint16_t x, uint16_t y, uint16_t h, uint16_t color);
+
+/* RGB565 常用颜色 */
+#define COLOR_WHITE   0xFFFFU
+#define COLOR_BLACK   0x0000U
+#define COLOR_RED     0xF800U
+#define COLOR_GREEN   0x07E0U
+#define COLOR_BLUE    0x001FU
+#define COLOR_YELLOW  0xFFE0U
+#define COLOR_MAGENTA 0xF81FU
+#define COLOR_CYAN    0x07FFU
+#define COLOR_ORANGE  0xFD20U
+#define COLOR_GRAY    0x8410U
+
+/* 表情背景色 */
+#define ILI9341_COLOR_HAPPY     0xFFF0U   /* 浅黄 */
+#define ILI9341_COLOR_SAD       0xC7FFU   /* 浅蓝 */
+#define ILI9341_COLOR_SLEEPY    0xE73FU   /* 浅紫 */
+#define ILI9341_COLOR_CONFUSED  0xFFD0U   /* 浅橙 */
+#define ILI9341_COLOR_BOOT      0xFFFFU   /* 白色 */
 
 #ifdef __cplusplus
 }

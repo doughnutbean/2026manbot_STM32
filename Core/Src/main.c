@@ -11,7 +11,7 @@ static void DebugUart_Init(void);
 
 int main(void)
 {
-    SystemClock_Config();
+     SystemClock_Config();
     BoardLed_Init();
     DebugUart_Init();
 
