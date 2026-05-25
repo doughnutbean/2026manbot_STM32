@@ -272,7 +272,7 @@
 
   <Group>
     <GroupName>App</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -295,8 +295,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\Src\mb_tasks.c</PathWithFileName>
-      <FilenameWithoutPath>mb_tasks.c</FilenameWithoutPath>
+      <PathWithFileName>.\App\Src\mb_display_ili9341.c</PathWithFileName>
+      <FilenameWithoutPath>mb_display_ili9341.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -307,8 +307,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\Src\mb_display_ili9341.c</PathWithFileName>
-      <FilenameWithoutPath>mb_display_ili9341.c</FilenameWithoutPath>
+      <PathWithFileName>.\App\Src\mb_tasks.c</PathWithFileName>
+      <FilenameWithoutPath>mb_tasks.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

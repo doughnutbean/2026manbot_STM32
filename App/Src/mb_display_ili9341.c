@@ -231,9 +231,9 @@ static void ILI9341_REG_Config(void)
     ILI9341_WriteData(0x38);
     ILI9341_WriteData(0x0F);
 
-    /* Memory Access Control: 竖屏, 左上角起点, 不翻转 */
+    /* Memory Access Control: 横屏模式 */
     ILI9341_WriteCmd(0x36);
-    ILI9341_WriteData(0x48);
+    ILI9341_WriteData(0x28);
 
     /* Column address: 0 ~ 239 */
     ILI9341_WriteCmd(0x2A);

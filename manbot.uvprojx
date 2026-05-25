@@ -413,14 +413,14 @@
               <FilePath>.\App\Src\mb_app.c</FilePath>
             </File>
             <File>
-              <FileName>mb_tasks.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\App\Src\mb_tasks.c</FilePath>
-            </File>
-            <File>
               <FileName>mb_display_ili9341.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\App\Src\mb_display_ili9341.c</FilePath>
+            </File>
+            <File>
+              <FileName>mb_tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\Src\mb_tasks.c</FilePath>
             </File>
           </Files>
         </Group>

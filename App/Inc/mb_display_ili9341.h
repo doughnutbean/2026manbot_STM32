@@ -7,8 +7,8 @@ extern "C" {
 
 #include <stdint.h>
 
-#define ILI9341_WIDTH   240U
-#define ILI9341_HEIGHT  320U
+#define ILI9341_WIDTH   320U   /* 横屏 */
+#define ILI9341_HEIGHT  240U
 
 /* FSMC 基地址（参考野火指南者 TFT 端口） */
 #define ILI9341_CMD_ADDR   ((uint32_t)0x60000000U)

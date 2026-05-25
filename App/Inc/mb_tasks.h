@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+
 void MB_TaskMain(void *argument);
 void MB_TaskVoice(void *argument);
 void MB_TaskMotion(void *argument);
