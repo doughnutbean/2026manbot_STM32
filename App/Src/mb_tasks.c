@@ -42,7 +42,7 @@ static void MB_RenderFace(const uint8_t *bmp)
     uint16_t row, col, run_start;
     uint8_t  in_run;
 
-    ILI9341_FillScreen(COLOR_BLACK);
+    ILI9341_FillScreen(COLOR_WHITE);
 
     for (row = 0U; row < FACE_H; row++)
     {
@@ -51,15 +51,15 @@ static void MB_RenderFace(const uint8_t *bmp)
         {
             uint16_t byte_idx = col + (row / 8U) * FACE_W;
             uint8_t  bit_pos  = row & 0x07U;
-            uint8_t  is_white = (bmp[byte_idx] & (1U << bit_pos)) ? 1U : 0U;
+            uint8_t  is_black = (bmp[byte_idx] & (1U << bit_pos)) ? 1U : 0U;
 
-            if (is_white && !in_run)     { run_start = col; in_run = 1U; }
-            else if (!is_white && in_run)
+            if (is_black && !in_run)     { run_start = col; in_run = 1U; }
+            else if (!is_black && in_run)
             {
                 ILI9341_FillRect(FACE_OX + run_start * FACE_SCALE_X,
                                  FACE_OY + row * FACE_SCALE_Y,
                                  (col - run_start) * FACE_SCALE_X,
-                                 FACE_SCALE_Y, COLOR_WHITE);
+                                 FACE_SCALE_Y, COLOR_BLACK);
                 in_run = 0U;
             }
         }
@@ -68,36 +68,81 @@ static void MB_RenderFace(const uint8_t *bmp)
             ILI9341_FillRect(FACE_OX + run_start * FACE_SCALE_X,
                              FACE_OY + row * FACE_SCALE_Y,
                              (FACE_W - run_start) * FACE_SCALE_X,
-                             FACE_SCALE_Y, COLOR_WHITE);
+                             FACE_SCALE_Y, COLOR_BLACK);
         }
     }
 }
 
-/* 表情映射 */
-static const uint8_t *g_face_list[] = {
-    Face_happy,      /* 0: 快乐 */
-    Face_stare,      /* 1: 瞪眼 */
-    Face_sleep,      /* 2: 睡觉 */
-    Face_mania,      /* 3: 狂热 */
-    Face_very_happy, /* 4: 大喜 */
-    Face_eyes,       /* 5: 眼睛 */
-    Face_hello,      /* 6: 打招呼 */
+/* 3x5 数字字模 (0-9) */
+static const uint8_t g_num_font[10][5] = {
+    {0x07,0x05,0x05,0x05,0x07},
+    {0x02,0x06,0x02,0x02,0x07},
+    {0x07,0x01,0x07,0x04,0x07},
+    {0x07,0x01,0x07,0x01,0x07},
+    {0x05,0x05,0x07,0x01,0x01},
+    {0x07,0x04,0x07,0x01,0x07},
+    {0x07,0x04,0x07,0x05,0x07},
+    {0x07,0x01,0x01,0x01,0x01},
+    {0x07,0x05,0x07,0x05,0x07},
+    {0x07,0x05,0x07,0x01,0x07},
 };
+#define NUM_S  3
+
+static void MB_DrawLabel(uint8_t n)
+{
+    uint8_t row, col;
+    for (row = 0U; row < 5U; row++)
+        for (col = 0U; col < 3U; col++)
+            if (g_num_font[n][row] & (1U << col))
+                ILI9341_FillRect(4U + col * NUM_S, 4U + row * NUM_S, NUM_S, NUM_S, COLOR_BLACK);
+}
+
+/* 7 个表情: 0-5 位图, 6 自定义大小眼 */
+static const uint8_t *g_face_list[] = {
+    Face_happy, Face_stare, Face_sleep, Face_mania,
+    Face_very_happy, Face_eyes,
+};
+#define FACE_COUNT  7U
 static uint8_t g_face_idx = 0U;
 
-static void MB_NextFace(void);  /* 前向声明 */
+/* 自定义表情6: 大小眼（实心矩形眼） */
+static void MB_DrawFace6(void)
+{
+    ILI9341_FillScreen(COLOR_WHITE);
+    /* 左眼 */
+    ILI9341_FillRect(60, 85, 48, 68, COLOR_BLACK);
+    /* 右眼 */
+    ILI9341_FillRect(200, 70, 56, 84, COLOR_BLACK);
+    MB_DrawLabel(6U);
+}
 
-static void MB_DisplayShowHappy(void)     { g_face_idx = 0U; MB_RenderFace(g_face_list[0]); }
-static void MB_DisplayShowSad(void)       { g_face_idx = 1U; MB_RenderFace(g_face_list[1]); }
-static void MB_DisplayShowSleepy(void)    { g_face_idx = 2U; MB_RenderFace(g_face_list[2]); }
+static void MB_NextFace(void);
+static void MB_PrevFace(void);
+
+static void MB_ShowFace(uint8_t idx)
+{
+    if (idx == 6U) { MB_DrawFace6(); }
+    else           { MB_RenderFace(g_face_list[idx]); MB_DrawLabel(idx); }
+}
+
+static void MB_DisplayShowHappy(void)     { g_face_idx = 0U; MB_ShowFace(0U); }
+static void MB_DisplayShowSad(void)       { MB_PrevFace(); }
+static void MB_DisplayShowSleepy(void)    { g_face_idx = 2U; MB_ShowFace(2U); }
 static void MB_DisplayShowConfused(void)  { MB_NextFace(); }
-static void MB_DisplayShowBootPattern(void){ g_face_idx = 0U; MB_RenderFace(g_face_list[0]); }
+static void MB_DisplayShowBootPattern(void){ g_face_idx = 0U; MB_ShowFace(0U); }
 
 static void MB_NextFace(void)
 {
     g_face_idx++;
-    if (g_face_idx >= 7U) g_face_idx = 0U;
-    MB_RenderFace(g_face_list[g_face_idx]);
+    if (g_face_idx >= FACE_COUNT) g_face_idx = 0U;
+    MB_ShowFace(g_face_idx);
+}
+
+static void MB_PrevFace(void)
+{
+    if (g_face_idx == 0U) g_face_idx = FACE_COUNT - 1U;
+    else g_face_idx--;
+    MB_ShowFace(g_face_idx);
 }
 
 static void MB_DisplayHwInit(void)
@@ -183,25 +228,74 @@ void MB_TaskMain(void *arg) {
 void MB_TaskVoice(void *arg) {
 #if (MB_TEST_INJECT_ENABLE == 1U)
     MB_VoiceEvent_t ve; (void)arg;
-    /* 启动只注入一次 Happy，之后保持不动 */
+
+    /* K1 按键 (PA0, 野火指南者板载) */
+    {
+        GPIO_InitTypeDef g;
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+        g.GPIO_Pin  = GPIO_Pin_0;
+        g.GPIO_Mode = GPIO_Mode_IPD;
+        GPIO_Init(GPIOA, &g);
+    }
+
+    /* 启动显示 Happy */
     ve.command = MB_CMD_EXPRESSION_HAPPY; ve.timestamp_ms = 0U; ve.confidence = 100U;
     osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-    MB_LOG("[VOICE] inject happy\r\n");
+    MB_LOG("[VOICE] start happy\r\n");
 
-    /* 等待按钮切换（暂时用心跳节拍模拟：每 10 次心跳 = 5 秒切一次） */
-    uint32_t last_tick = g_mb_heartbeat_ticks;
+    /* K1 (PA0) 下一张, K2 (PC13) 上一张 */
+    /* GPIO init */
+    {
+        GPIO_InitTypeDef g;
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC, ENABLE);
+        g.GPIO_Pin  = GPIO_Pin_0;
+        g.GPIO_Mode = GPIO_Mode_IPD;
+        GPIO_Init(GPIOA, &g);
+        g.GPIO_Pin  = GPIO_Pin_13;
+        g.GPIO_Mode = GPIO_Mode_IPU;   /* PC13 内置上拉, 按下=低 */
+        GPIO_Init(GPIOC, &g);
+    }
+
+    /* 启动显示 Happy */
+    ve.command = MB_CMD_EXPRESSION_HAPPY; ve.timestamp_ms = 0U; ve.confidence = 100U;
+    osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
+
+    uint8_t  trig_n = 0U, trig_p = 0U;
     for (;;)
     {
-        osDelay(200U);
-        if (g_mb_heartbeat_ticks - last_tick >= 10U)
+        osDelay(30U);
+
+        /* K1: 按下后松开 → 下一张 */
         {
-            last_tick = g_mb_heartbeat_ticks;
-            /* TODO: 替换为真实按钮读 GPIO */
-            ve.command = MB_CMD_EXPRESSION_CONFUSED; /* 用 Confused 触发 MB_NextFace */
-            ve.timestamp_ms = g_mb_heartbeat_ticks * 500U; ve.confidence = 100U;
-            osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-            MB_LOG("[VOICE] next face\r\n");
+            static uint8_t last = 0U, db = 0U, armed = 0U;
+            uint8_t k1 = (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == Bit_SET) ? 1U : 0U;
+            if      ( k1 && !last) { db = 0U; }
+            else if ( k1 &&  last) { db++; }
+            else if (!k1 &&  last) { db = 0U; if (armed) { armed = 0U; trig_n = 1U; } }
+            else                   { db = 0U; }
+            if (db >= 2U)          { armed = 1U; db = 0U; }
+            last = k1;
         }
+
+        /* K2: 按下后松开 → 上一张 */
+        {
+            static uint8_t last = 0U, db = 0U, armed = 0U;
+            uint8_t k2 = (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == Bit_RESET) ? 1U : 0U;
+            if      ( k2 && !last) { db = 0U; }
+            else if ( k2 &&  last) { db++; }
+            else if (!k2 &&  last) { db = 0U; if (armed) { armed = 0U; trig_p = 1U; } }
+            else                   { db = 0U; }
+            if (db >= 2U)          { armed = 1U; db = 0U; }
+            last = k2;
+        }
+
+        if (trig_n) { trig_n = 0U; ve.command = MB_CMD_EXPRESSION_CONFUSED; goto SEND; }
+        if (trig_p) { trig_p = 0U; ve.command = MB_CMD_EXPRESSION_SAD;       goto SEND; }
+        continue;
+    SEND:
+        ve.timestamp_ms = g_mb_heartbeat_ticks * 500U; ve.confidence = 100U;
+        osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
+        MB_LOG("[BTN] switch\r\n");
     }
 #else
     (void)arg; for (;;) osDelay(20U);
