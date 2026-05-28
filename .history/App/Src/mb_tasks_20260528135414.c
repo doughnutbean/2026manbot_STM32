@@ -34,41 +34,6 @@ static void MB_SetState(MB_SystemState_t state)
     }
 }
 
-static uint8_t MB_MapCommandToDisplay(MB_CommandId_t command, MB_DisplayEvent_t *display_event)
-{
-    display_event->command = command;
-    display_event->expression_id = MB_EXPRESSION_NONE;
-    display_event->animate = 0U;
-
-    switch (command)
-    {
-    case MB_CMD_FORWARD:
-    case MB_CMD_BACKWARD:
-    case MB_CMD_WAVE:
-    case MB_CMD_EXPRESSION_HAPPY:
-        display_event->expression_id = MB_EXPRESSION_HAPPY;
-        display_event->animate = 1U;
-        return 1U;
-    case MB_CMD_EXPRESSION_SAD:
-        display_event->expression_id = MB_EXPRESSION_SAD;
-        display_event->animate = 0U;
-        return 1U;
-    case MB_CMD_SIT:
-    case MB_CMD_EXPRESSION_SLEEPY:
-        display_event->expression_id = MB_EXPRESSION_SLEEPY;
-        display_event->animate = 0U;
-        return 1U;
-    case MB_CMD_TURN_LEFT:
-    case MB_CMD_TURN_RIGHT:
-    case MB_CMD_EXPRESSION_CONFUSED:
-        display_event->expression_id = MB_EXPRESSION_CONFUSED;
-        display_event->animate = 1U;
-        return 1U;
-    default:
-        return 0U;
-    }
-}
-
 static void MB_HandleCommand(const MB_VoiceEvent_t *voice_event)
 {
     MB_MotionEvent_t motion_event;
@@ -79,6 +44,7 @@ static void MB_HandleCommand(const MB_VoiceEvent_t *voice_event)
     (void)memset(&tts_event, 0, sizeof(tts_event));
 
     motion_event.command = voice_event->command;
+    display_event.command = voice_event->command;
     tts_event.source_command = voice_event->command;
 
     switch (voice_event->command)
@@ -86,31 +52,43 @@ static void MB_HandleCommand(const MB_VoiceEvent_t *voice_event)
     case MB_CMD_FORWARD:
         motion_event.motion_group_id = 0x01;
         motion_event.duration_ms = 1500;
+        display_event.expression_id = 0x01;
+        display_event.animate = 1;
         tts_event.tts_id = MB_TTS_EXEC_FORWARD;
         break;
     case MB_CMD_BACKWARD:
         motion_event.motion_group_id = 0x02;
         motion_event.duration_ms = 1500;
+        display_event.expression_id = 0x01;
+        display_event.animate = 1;
         tts_event.tts_id = MB_TTS_EXEC_BACKWARD;
         break;
     case MB_CMD_TURN_LEFT:
         motion_event.motion_group_id = 0x03;
         motion_event.duration_ms = 900;
+        display_event.expression_id = 0x04;
+        display_event.animate = 1;
         tts_event.tts_id = MB_TTS_EXEC_TURN_LEFT;
         break;
     case MB_CMD_TURN_RIGHT:
         motion_event.motion_group_id = 0x04;
         motion_event.duration_ms = 900;
+        display_event.expression_id = 0x04;
+        display_event.animate = 1;
         tts_event.tts_id = MB_TTS_EXEC_TURN_RIGHT;
         break;
     case MB_CMD_SIT:
         motion_event.motion_group_id = 0x05;
         motion_event.duration_ms = 1000;
+        display_event.expression_id = 0x03;
+        display_event.animate = 0;
         tts_event.tts_id = MB_TTS_EXEC_SIT;
         break;
     case MB_CMD_WAVE:
         motion_event.motion_group_id = 0x06;
         motion_event.duration_ms = 1200;
+        display_event.expression_id = 0x01;
+        display_event.animate = 1;
         tts_event.tts_id = MB_TTS_EXEC_WAVE;
         break;
     case MB_CMD_SLEEP:
@@ -121,18 +99,10 @@ static void MB_HandleCommand(const MB_VoiceEvent_t *voice_event)
         tts_event.tts_id = MB_TTS_WAKE_ACK;
         MB_SetState(MB_STATE_AWAKE);
         break;
-    case MB_CMD_EXPRESSION_HAPPY:
-    case MB_CMD_EXPRESSION_SAD:
-    case MB_CMD_EXPRESSION_SLEEPY:
-    case MB_CMD_EXPRESSION_CONFUSED:
-        tts_event.tts_id = MB_TTS_NONE;
-        break;
     default:
         tts_event.tts_id = MB_TTS_UNKNOWN_CMD;
         break;
     }
-
-    (void)MB_MapCommandToDisplay(voice_event->command, &display_event);
 
     if (motion_event.motion_group_id != 0U)
     {
@@ -142,10 +112,7 @@ static void MB_HandleCommand(const MB_VoiceEvent_t *voice_event)
     {
         (void)osMessageQueuePut(g_mb_app.main_to_display_queue, &display_event, 0U, 0U);
     }
-    if (tts_event.tts_id != MB_TTS_NONE)
-    {
-        (void)osMessageQueuePut(g_mb_app.main_to_tts_queue, &tts_event, 0U, 0U);
-    }
+    (void)osMessageQueuePut(g_mb_app.main_to_tts_queue, &tts_event, 0U, 0U);
 }
 
 void MB_TaskMain(void *argument)
