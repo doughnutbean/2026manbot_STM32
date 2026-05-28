@@ -2,10 +2,13 @@
 #include "mb_tasks.h"
 #include "mb_display_ili9341.h"
 #include "mb_face_bitmap.h"
+#include "mb_motion.h"
 #include <string.h>
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
-#include "mb_face_bitmap.c"   /* 内联位图数据，避免 Keil 单独编译 */
+#include "mb_face_bitmap.c"
+#include "mb_servo.c"
+#include "mb_motion.c"   /* 内联位图数据，避免 Keil 单独编译 */
 
 #define MB_DEBUG_LOG_ENABLE     1U
 #define MB_TEST_INJECT_ENABLE   1U
@@ -228,74 +231,34 @@ void MB_TaskMain(void *arg) {
 void MB_TaskVoice(void *arg) {
 #if (MB_TEST_INJECT_ENABLE == 1U)
     MB_VoiceEvent_t ve; (void)arg;
-
-    /* K1 按键 (PA0, 野火指南者板载) */
-    {
-        GPIO_InitTypeDef g;
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-        g.GPIO_Pin  = GPIO_Pin_0;
-        g.GPIO_Mode = GPIO_Mode_IPD;
-        GPIO_Init(GPIOA, &g);
-    }
+    MB_LOG("[VOICE] started\r\n");
 
     /* 启动显示 Happy */
     ve.command = MB_CMD_EXPRESSION_HAPPY; ve.timestamp_ms = 0U; ve.confidence = 100U;
     osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-    MB_LOG("[VOICE] start happy\r\n");
+    osDelay(1000U); osDelay(1000U);
 
-    /* K1 (PA0) 下一张, K2 (PC13) 上一张 */
-    /* GPIO init */
-    {
-        GPIO_InitTypeDef g;
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC, ENABLE);
-        g.GPIO_Pin  = GPIO_Pin_0;
-        g.GPIO_Mode = GPIO_Mode_IPD;
-        GPIO_Init(GPIOA, &g);
-        g.GPIO_Pin  = GPIO_Pin_13;
-        g.GPIO_Mode = GPIO_Mode_IPU;   /* PC13 内置上拉, 按下=低 */
-        GPIO_Init(GPIOC, &g);
-    }
+    /* ===== 舵机测试 ===== */
+    extern void Servo_Init(void);
+    extern void Servo_SetAngle(uint8_t ch, float angle);
+    Servo_Init();
+    extern uint8_t g_servo_inited;
+    if (g_servo_inited) MB_LOG("[VOICE] servo OK\r\n");
+    else                MB_LOG("[VOICE] servo FAIL - no ACK!\r\n");
 
-    /* 启动显示 Happy */
-    ve.command = MB_CMD_EXPRESSION_HAPPY; ve.timestamp_ms = 0U; ve.confidence = 100U;
-    osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-
-    uint8_t  trig_n = 0U, trig_p = 0U;
+    /* 舵机摆动 */
+    MB_LOG("[VOICE] servo test start\r\n");
+    /* PWM0/4/8/12 在 90~100 之间摆动 */
     for (;;)
     {
-        osDelay(30U);
-
-        /* K1: 按下后松开 → 下一张 */
-        {
-            static uint8_t last = 0U, db = 0U, armed = 0U;
-            uint8_t k1 = (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == Bit_SET) ? 1U : 0U;
-            if      ( k1 && !last) { db = 0U; }
-            else if ( k1 &&  last) { db++; }
-            else if (!k1 &&  last) { db = 0U; if (armed) { armed = 0U; trig_n = 1U; } }
-            else                   { db = 0U; }
-            if (db >= 2U)          { armed = 1U; db = 0U; }
-            last = k1;
-        }
-
-        /* K2: 按下后松开 → 上一张 */
-        {
-            static uint8_t last = 0U, db = 0U, armed = 0U;
-            uint8_t k2 = (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == Bit_RESET) ? 1U : 0U;
-            if      ( k2 && !last) { db = 0U; }
-            else if ( k2 &&  last) { db++; }
-            else if (!k2 &&  last) { db = 0U; if (armed) { armed = 0U; trig_p = 1U; } }
-            else                   { db = 0U; }
-            if (db >= 2U)          { armed = 1U; db = 0U; }
-            last = k2;
-        }
-
-        if (trig_n) { trig_n = 0U; ve.command = MB_CMD_EXPRESSION_CONFUSED; goto SEND; }
-        if (trig_p) { trig_p = 0U; ve.command = MB_CMD_EXPRESSION_SAD;       goto SEND; }
-        continue;
-    SEND:
-        ve.timestamp_ms = g_mb_heartbeat_ticks * 500U; ve.confidence = 100U;
-        osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-        MB_LOG("[BTN] switch\r\n");
+        Servo_SetAngle(0U,  90.0f);
+        Servo_SetAngle(4U,  90.0f);
+        Servo_SetAngle(8U,  90.0f);
+        Servo_SetAngle(12U, 90.0f); osDelay(1000U);
+        Servo_SetAngle(0U,  100.0f);
+        Servo_SetAngle(4U,  100.0f);
+        Servo_SetAngle(8U,  100.0f);
+        Servo_SetAngle(12U, 100.0f); osDelay(1000U);
     }
 #else
     (void)arg; for (;;) osDelay(20U);
@@ -304,9 +267,19 @@ void MB_TaskVoice(void *arg) {
 
 void MB_TaskMotion(void *arg) {
     MB_MotionEvent_t me; (void)memset(&me, 0, sizeof(me)); (void)arg;
+    Motion_Init();
     for (;;) {
         if (osMessageQueueGet(g_mb_app.main_to_motion_queue, &me, NULL, osWaitForever) == osOK) {
-            MB_LOG("[MOTION] run\r\n"); osDelay(me.duration_ms);
+            MB_LOG("[MOTION] run\r\n");
+            switch (me.motion_group_id) {
+                case 1U: Motion_Forward(me.duration_ms);  break;
+                case 2U: Motion_Backward(me.duration_ms); break;
+                case 3U: Motion_TurnLeft(me.duration_ms); break;
+                case 4U: Motion_TurnRight(me.duration_ms);break;
+                case 5U: Motion_Sit();                    break;
+                case 6U: Motion_LieDown();                break;
+                default: break;
+            }
         }
     }
 }
