@@ -248,18 +248,19 @@ void MB_TaskVoice(void *arg) {
 
     /* 舵机摆动 */
     MB_LOG("[VOICE] servo test start\r\n");
-    /* PWM0/4/8/12 在 90~100 之间摆动 */
-    for (;;)
-    {
-        Servo_SetAngle(0U,  90.0f);
-        Servo_SetAngle(4U,  90.0f);
-        Servo_SetAngle(8U,  90.0f);
-        Servo_SetAngle(12U, 90.0f); osDelay(1000U);
-        Servo_SetAngle(0U,  100.0f);
-        Servo_SetAngle(4U,  100.0f);
-        Servo_SetAngle(8U,  100.0f);
-        Servo_SetAngle(12U, 100.0f); osDelay(1000U);
-    }
+    /* 动作测试: 站→坐→趴→前进→后退 */
+    extern void Motion_Sit(void);
+    extern void Motion_LieDown(void);
+    extern void Motion_Forward(uint16_t d);
+    extern void Motion_Backward(uint16_t d);
+    MB_LOG("[VOICE] motion test\r\n");
+    osDelay(2000U);
+    Motion_Sit();       osDelay(2000U);
+    Motion_LieDown();   osDelay(2000U);
+    Motion_Forward(3000U);  osDelay(1000U);
+    Motion_Backward(3000U); osDelay(1000U);
+
+    for (;;) osDelay(1000U);
 #else
     (void)arg; for (;;) osDelay(20U);
 #endif

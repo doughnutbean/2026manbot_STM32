@@ -48,10 +48,12 @@ void Servo_Init(void)
     PCA_Write(PCA_PRESCALE, 121U);
     PCA_Write(PCA_MODE1, 0xA1U);
     { volatile uint32_t d = 10000U; while (d--) {} }
-    PCA_Write(PCA_MODE1, 0x21U);  /* AI=1 保持 */}
+    PCA_Write(PCA_MODE1, 0x21U);  /* AI=1 保持 */
+}
 
 void Servo_SetAngle(uint8_t ch, float angle)
 {
+    if (ch > 15U) return;
     if (!g_servo_inited) Servo_Init();
     if (angle < 0.0f) angle = 0.0f;
     if (angle > 180.0f) angle = 180.0f;
