@@ -13,7 +13,7 @@ int main(void)
 {
      SystemClock_Config();
     BoardLed_Init();
-    DebugUart_Init();
+  // DebugUart_Init();   // <-- 注释掉，避免与语音接收冲突
 
     osKernelInitialize();
     MB_AppInit();
