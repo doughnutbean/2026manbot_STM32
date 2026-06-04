@@ -228,43 +228,47 @@ void MB_TaskMain(void *arg) {
     }
 }
 
-void MB_TaskVoice(void *arg) {
-#if (MB_TEST_INJECT_ENABLE == 1U)
-    MB_VoiceEvent_t ve; (void)arg;
-    MB_LOG("[VOICE] started\r\n");
+void MB_TaskVoice(void *argument)
+{
+    MB_VoiceEvent_t voice_event;
+    uint8_t raw_cmd;
+    uint8_t last_cmd = 0;
+    uint32_t last_cmd_tick = 0;
+    const uint32_t debounce_ticks = 300;  // 300ms 防抖
+    (void)argument;
 
-    /* 启动显示 Happy */
-    ve.command = MB_CMD_EXPRESSION_HAPPY; ve.timestamp_ms = 0U; ve.confidence = 100U;
-    osMessageQueuePut(g_mb_app.voice_to_main_queue, &ve, 0U, 0U);
-    osDelay(1000U); osDelay(1000U);
+    MB_VoiceDrv_Init();   // 初始化 USART1
 
-    /* ===== 舵机测试 ===== */
-    extern void Servo_Init(void);
-    extern void Servo_SetAngle(uint8_t ch, float angle);
-    Servo_Init();
-    extern uint8_t g_servo_inited;
-    if (g_servo_inited) MB_LOG("[VOICE] servo OK\r\n");
-    else                MB_LOG("[VOICE] servo FAIL - no ACK!\r\n");
-
-    /* 舵机摆动 */
-    MB_LOG("[VOICE] servo test start\r\n");
-    /* PWM0/4/8/12 在 90~100 之间摆动 */
     for (;;)
     {
-        Servo_SetAngle(0U,  90.0f);
-        Servo_SetAngle(4U,  90.0f);
-        Servo_SetAngle(8U,  90.0f);
-        Servo_SetAngle(12U, 90.0f); osDelay(1000U);
-        Servo_SetAngle(0U,  100.0f);
-        Servo_SetAngle(4U,  100.0f);
-        Servo_SetAngle(8U,  100.0f);
-        Servo_SetAngle(12U, 100.0f); osDelay(1000U);
-    }
-#else
-    (void)arg; for (;;) osDelay(20U);
-#endif
-}
+        raw_cmd = MB_VoiceDrv_GetCommand();
+        if (raw_cmd != 0)
+        {
+            uint32_t now = g_mb_heartbeat_ticks * 500;
 
+            // 防抖
+            if (raw_cmd == last_cmd && (now - last_cmd_tick) < debounce_ticks)
+            {
+                // 忽略重复指令
+            }
+            else
+            {
+                voice_event.command = (MB_CommandId_t)raw_cmd;
+                voice_event.timestamp_ms = now;
+                voice_event.confidence = 100U;
+
+                if (osMessageQueuePut(g_mb_app.voice_to_main_queue,
+                                      &voice_event, 0U, 0U) == osOK)
+                {
+                    // 命令成功入队（调试日志已关闭，无输出）
+                }
+                last_cmd = raw_cmd;
+                last_cmd_tick = now;
+            }
+        }
+        osDelay(20);   // 20ms 轮询
+    }
+}
 void MB_TaskMotion(void *arg) {
     MB_MotionEvent_t me; (void)memset(&me, 0, sizeof(me)); (void)arg;
     Motion_Init();
