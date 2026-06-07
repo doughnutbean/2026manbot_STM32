@@ -21,7 +21,12 @@ typedef enum
     MB_CMD_EXPRESSION_HAPPY = 0x30,
     MB_CMD_EXPRESSION_SAD = 0x31,
     MB_CMD_EXPRESSION_SLEEPY = 0x32,
-    MB_CMD_EXPRESSION_CONFUSED = 0x33
+    MB_CMD_EXPRESSION_CONFUSED = 0x33,
+    // 新增动作命令（添加在这里，不改变原有值）
+    MB_CMD_LIE_DOWN = 0x26,
+    MB_CMD_SPIN = 0x27,
+    MB_CMD_SLOW_WALK = 0x28,
+    MB_CMD_SHAKE_HANDS = 0x29
 } MB_CommandId_t;
 
 typedef enum
@@ -54,7 +59,12 @@ typedef enum
     MB_TTS_EXEC_SIT,
     MB_TTS_EXEC_WAVE,
     MB_TTS_UNKNOWN_CMD,
-    MB_TTS_SLEEP_ACK
+    MB_TTS_SLEEP_ACK,
+    // 新增 TTS 动作（添加在这里）
+    MB_TTS_EXEC_LIE_DOWN,
+    MB_TTS_EXEC_SPIN,
+    MB_TTS_EXEC_SLOW_WALK,
+    MB_TTS_EXEC_SHAKE_HANDS
 } MB_TtsId_t;
 
 typedef struct
