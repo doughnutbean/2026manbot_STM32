@@ -3,6 +3,7 @@
 #include "mb_display_ili9341.h"
 #include "mb_face_bitmap.h"
 #include "mb_motion.h"
+#include "mb_voice_drv.h"
 #include <string.h>
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
@@ -230,74 +231,68 @@ void MB_TaskMain(void *arg) {
 
 void MB_TaskVoice(void *argument)
 {
-    MB_VoiceEvent_t voice_event;
-    uint8_t raw_cmd;
-    uint8_t last_cmd = 0;
-    uint32_t last_cmd_tick = 0;
-    const uint32_t debounce_ticks = 300;  // 300ms 防抖
     (void)argument;
 
-    MB_VoiceDrv_Init();   // 初始化 USART1
-
-<<<<<<< HEAD
-    /* ===== 舵机测试 ===== */
+#if (MB_TEST_INJECT_ENABLE == 1U)
+    /* ===== 舵机 + 动作测试 ===== */
     extern void Servo_Init(void);
     extern void Servo_SetAngle(uint8_t ch, float angle);
-    Servo_Init();
     extern uint8_t g_servo_inited;
+    Servo_Init();
     if (g_servo_inited) MB_LOG("[VOICE] servo OK\r\n");
-    else                MB_LOG("[VOICE] servo FAIL - no ACK!\r\n");
+    else                MB_LOG("[VOICE] servo FAIL\r\n");
 
-    /* 舵机摆动 */
-    MB_LOG("[VOICE] servo test start\r\n");
-    /* 动作测试: 站→坐→趴→前进→后退 */
     extern void Motion_Sit(void);
     extern void Motion_LieDown(void);
     extern void Motion_Forward(uint16_t d);
     extern void Motion_Backward(uint16_t d);
+    extern void Motion_TurnLeft(uint16_t d);
+    extern void Motion_TurnRight(uint16_t d);
     MB_LOG("[VOICE] motion test\r\n");
-    osDelay(2000U);
-    Motion_Sit();       osDelay(2000U);
-    Motion_LieDown();   osDelay(2000U);
-    Motion_Forward(3000U);  osDelay(1000U);
-    Motion_Backward(3000U); osDelay(1000U);
+
+    osDelay(3000U);
+    MB_LOG("[M] stand\r\n");       osDelay(5000U);
+    MB_LOG("[M] sit\r\n");         Motion_Sit();           osDelay(5000U);
+    MB_LOG("[M] lie down\r\n");    Motion_LieDown();       osDelay(5000U);
+    Stand();                                              osDelay(5000U);
+    MB_LOG("[M] forward\r\n");     Motion_Forward(2000U);  osDelay(5000U);
+    MB_LOG("[M] backward\r\n");    Motion_Backward(2000U); osDelay(5000U);
+    MB_LOG("[M] turn left\r\n");   Motion_TurnLeft(1000U); osDelay(5000U);
+    MB_LOG("[M] turn right\r\n");  Motion_TurnRight(1000U);osDelay(5000U);
+    MB_LOG("[M] done\r\n");
 
     for (;;) osDelay(1000U);
 #else
-    (void)arg; for (;;) osDelay(20U);
-#endif
-}
-=======
+    /* 语音指令监听 */
+    MB_VoiceEvent_t voice_event;
+    uint8_t raw_cmd;
+    uint8_t last_cmd = 0;
+    uint32_t last_cmd_tick = 0;
+    const uint32_t debounce_ticks = 300;
+    MB_VoiceDrv_Init();
     for (;;)
     {
         raw_cmd = MB_VoiceDrv_GetCommand();
         if (raw_cmd != 0)
         {
             uint32_t now = g_mb_heartbeat_ticks * 500;
->>>>>>> a6d897567fe451338f7f769bdc034f913418ca4c
-
-            // 防抖
             if (raw_cmd == last_cmd && (now - last_cmd_tick) < debounce_ticks)
             {
-                // 忽略重复指令
+                /* 忽略防抖 */
             }
             else
             {
                 voice_event.command = (MB_CommandId_t)raw_cmd;
                 voice_event.timestamp_ms = now;
                 voice_event.confidence = 100U;
-
-                if (osMessageQueuePut(g_mb_app.voice_to_main_queue,
-                                      &voice_event, 0U, 0U) == osOK)
-                {
-                    // 命令成功入队（调试日志已关闭，无输出）
-                }
+                osMessageQueuePut(g_mb_app.voice_to_main_queue, &voice_event, 0U, 0U);
                 last_cmd = raw_cmd;
                 last_cmd_tick = now;
             }
         }
-        osDelay(20);   // 20ms 轮询
+        osDelay(20);
     }
+#endif
 }
 void MB_TaskMotion(void *arg) {
     MB_MotionEvent_t me; (void)memset(&me, 0, sizeof(me)); (void)arg;
