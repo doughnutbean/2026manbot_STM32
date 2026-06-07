@@ -8,7 +8,7 @@ import io
 import wave
 
 # ==================== 配置 ====================
-SERIAL_PORT = 'COM3'      # 开发板串口号，按实修改
+SERIAL_PORT = 'COM9'      # 开发板串口号，按实修改
 BAUDRATE = 9600
 
 # 命令词 → 发送字节（必须与 STM32 枚举一致）
