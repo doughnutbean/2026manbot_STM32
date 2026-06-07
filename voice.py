@@ -8,27 +8,31 @@ import io
 import wave
 
 # ==================== 配置 ====================
-SERIAL_PORT = 'COM3'      # 改成你的开发板 USB 串口号（在设备管理器中查看）
+SERIAL_PORT = 'COM3'      # 改成你的开发板串口号
 BAUDRATE = 9600
 
-# 命令词 → 发送字节（必须与 STM32 中的 MB_CommandId_t 一致）
+# 命令词 → 发送字节（必须与 STM32 MB_CommandId_t 一致）
 CMD_MAP = {
-    "前进": 0x01,
-    "后退": 0x02,
-    "左转": 0x03,
-    "右转": 0x04,
-    "坐下": 0x05,
-    "挥手": 0x06,
-    "休眠": 0x07,
-    "唤醒": 0x08,
+    "前进": 0x20,
+    "后退": 0x21,
+    "左转": 0x22,
+    "右转": 0x23,
+    "坐下": 0x24,
+    "挥手": 0x25,
+    "休眠": 0x11,
+    "唤醒": 0x10,
+    # 新增四个动作
+    "趴下": 0x26,
+    "转圈": 0x27,
+    "慢走": 0x28,
+    "握手": 0x29,
 }
 
 def record_audio(duration=3, sample_rate=16000):
-    """用 sounddevice 录制音频，返回 WAV 格式字节数据"""
-    print("正在听... 说出命令（前进/后退/左转/右转/坐下/挥手/休眠/唤醒）")
+    """使用 sounddevice 录音，返回 WAV 字节数据"""
+    print("正在听... 说出命令（前进/后退/左转/右转/坐下/挥手/休眠/唤醒/趴下/转圈/慢走/握手）")
     recording = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
-    sd.wait()  # 等待录音结束
-    # 将 numpy 数组转换为 WAV 字节流
+    sd.wait()
     byte_io = io.BytesIO()
     with wave.open(byte_io, 'wb') as wf:
         wf.setnchannels(1)
@@ -37,7 +41,7 @@ def record_audio(duration=3, sample_rate=16000):
         wf.writeframes(recording.tobytes())
     return byte_io.getvalue()
 
-def recognize_speech(recognizer, audio_data):
+def recognize_speech_google(recognizer, audio_data):
     """使用 Google 在线识别"""
     try:
         audio = sr.AudioData(audio_data, sample_rate=16000, sample_width=2)
@@ -48,7 +52,7 @@ def recognize_speech(recognizer, audio_data):
         print("无法识别语音")
         return ""
     except sr.RequestError as e:
-        print(f"网络请求错误: {e}")
+        print(f"Google 请求错误: {e}")
         return ""
 
 def main():
@@ -62,11 +66,11 @@ def main():
         sys.exit(1)
 
     recognizer = sr.Recognizer()
-    print("语音控制就绪！按 Ctrl+C 退出")
+    print("语音控制就绪（Google 识别）！按 Ctrl+C 退出")
     try:
         while True:
-            audio_data = record_audio(duration=3)      # 录制 3 秒
-            text = recognize_speech(recognizer, audio_data)
+            audio_data = record_audio(duration=3)
+            text = recognize_speech_google(recognizer, audio_data)
             if not text:
                 continue
 
