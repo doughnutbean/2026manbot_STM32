@@ -250,18 +250,19 @@ void MB_TaskVoice(void *argument)
     extern void Motion_TurnRight(uint16_t d);
     MB_LOG("[VOICE] motion test\r\n");
 
-    osDelay(3000U);
-    MB_LOG("[M] stand\r\n");       osDelay(5000U);
-    MB_LOG("[M] sit\r\n");         Motion_Sit();           osDelay(5000U);
-    MB_LOG("[M] lie down\r\n");    Motion_LieDown();       osDelay(5000U);
-    Stand();                                              osDelay(5000U);
-    MB_LOG("[M] forward\r\n");     Motion_Forward(2000U);  osDelay(5000U);
-    MB_LOG("[M] backward\r\n");    Motion_Backward(2000U); osDelay(5000U);
-    MB_LOG("[M] turn left\r\n");   Motion_TurnLeft(1000U); osDelay(5000U);
-    MB_LOG("[M] turn right\r\n");  Motion_TurnRight(1000U);osDelay(5000U);
-    MB_LOG("[M] done\r\n");
+    extern void Motion_Wave(void);
+    extern void Motion_Swing(uint16_t d);
+    extern void Motion_Forward(uint16_t d);
 
-    for (;;) osDelay(1000U);
+    for (;;)
+    {
+        Stand();                osDelay(3000U);
+        Motion_LieDown();       osDelay(3000U);
+        Motion_Sit();           osDelay(3000U);
+        Motion_Wave();          osDelay(3000U);
+        Motion_Swing(3000U);    osDelay(3000U);
+        Motion_Forward(3000U);  osDelay(3000U);
+    }
 #else
     /* 语音指令监听 */
     MB_VoiceEvent_t voice_event;
